@@ -1,0 +1,47 @@
+specVersion: 0.0.1
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: Token
+    network: mainnet
+    source:
+      address: "0x93249388A3D98Fd2412429a78bDd43691CC1508B"
+      abi: Token
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.2
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - ApprovalForAll
+        - BaseURIUpdated
+        - Minted
+        - NFTMarketUpdated
+        - NFTMetadataUpdated
+        - TokenCreatorUpdated
+        - TokenIPFSPathUpdated
+        - Transfer
+      abis:
+        - name: Token
+          file: ./abis/Token.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,indexed uint256)
+          handler: handleApproval
+        - event: ApprovalForAll(indexed address,indexed address,bool)
+          handler: handleApprovalForAll
+        - event: BaseURIUpdated(string)
+          handler: handleBaseURIUpdated
+        - event: Minted(indexed address,indexed uint256,indexed string,string)
+          handler: handleMinted
+        - event: NFTMarketUpdated(indexed address)
+          handler: handleNFTMarketUpdated
+        - event: NFTMetadataUpdated(string,string,string)
+          handler: handleNFTMetadataUpdated
+        - event: TokenCreatorUpdated(indexed address,indexed address,indexed uint256)
+          handler: handleTokenCreatorUpdated
+        - event: TokenIPFSPathUpdated(indexed uint256,indexed string,string)
+          handler: handleTokenIPFSPathUpdated
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
+      file: ./src/mapping.ts

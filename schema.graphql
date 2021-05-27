@@ -1,0 +1,59 @@
+type Approval @entity {
+  id: ID!
+  owner: Bytes! # address
+  approved: Bytes! # address
+  tokenId: BigInt! # uint256
+}
+
+type ApprovalForAll @entity {
+  id: ID!
+  owner: Bytes! # address
+  operator: Bytes! # address
+  approved: Boolean! # bool
+}
+
+type BaseURIUpdated @entity {
+  id: ID!
+  baseURI: String! # string
+}
+
+type Minted @entity {
+  id: ID!
+  creator: Bytes! # address
+  tokenId: BigInt! # uint256
+  indexedTokenIPFSPath: String! # string
+  tokenIPFSPath: String! # string
+}
+
+type NFTMarketUpdated @entity {
+  id: ID!
+  nftMarket: Bytes! # address
+}
+
+type NFTMetadataUpdated @entity {
+  id: ID!
+  name: String! # string
+  symbol: String! # string
+  baseURI: String! # string
+}
+
+type TokenCreatorUpdated @entity {
+  id: ID!
+  fromCreator: Bytes! # address
+  toCreator: Bytes! # address
+  tokenId: BigInt! # uint256
+}
+
+type TokenIPFSPathUpdated @entity {
+  id: ID!
+  tokenId: BigInt! # uint256
+  indexedTokenIPFSPath: String! # string
+  tokenIPFSPath: String! # string
+}
+
+type Transfer @entity {
+  id: ID!
+  from: Bytes! # address
+  to: Bytes! # address
+  tokenId: BigInt! # uint256
+}
