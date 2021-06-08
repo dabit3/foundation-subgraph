@@ -60,13 +60,21 @@ export class Token extends Entity {
     this.set("contentURI", Value.fromString(value));
   }
 
-  get tokenIPFSPath(): string {
+  get tokenIPFSPath(): string | null {
     let value = this.get("tokenIPFSPath");
-    return value.toString();
+    if (value === null || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
   }
 
-  set tokenIPFSPath(value: string) {
-    this.set("tokenIPFSPath", Value.fromString(value));
+  set tokenIPFSPath(value: string | null) {
+    if (value === null) {
+      this.unset("tokenIPFSPath");
+    } else {
+      this.set("tokenIPFSPath", Value.fromString(value as string));
+    }
   }
 
   get name(): string {
@@ -76,6 +84,15 @@ export class Token extends Entity {
 
   set name(value: string) {
     this.set("name", Value.fromString(value));
+  }
+
+  get createdAtTimestamp(): BigInt {
+    let value = this.get("createdAtTimestamp");
+    return value.toBigInt();
+  }
+
+  set createdAtTimestamp(value: BigInt) {
+    this.set("createdAtTimestamp", Value.fromBigInt(value));
   }
 
   get creator(): string {

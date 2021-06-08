@@ -2,7 +2,6 @@ import {
   TokenIPFSPathUpdated as TokenIPFSPathUpdatedEvent,
   Transfer as TransferEvent,
   Token as TokenContract,
-  NFTMetadataUpdated as NFTMetadataUpdatedContract
 } from "../generated/Token/Token"
 
 import {
@@ -26,6 +25,7 @@ export function handleTransfer(event: TransferEvent): void {
     token.contentURI = tokenContract.tokenURI(event.params.tokenId);
     token.tokenIPFSPath = tokenContract.getTokenIPFSPath(event.params.tokenId);
     token.name = tokenContract.name();
+    token.createdAtTimestamp = event.block.timestamp;
   }
   token.owner = event.params.to.toHexString();
   token.save();
