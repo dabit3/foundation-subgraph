@@ -25,3 +25,24 @@ dataSources:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
       file: Token/Token.wasm
+  - kind: ethereum/contract
+    name: NFTMarketAuction
+    network: mainnet
+    source:
+      address: "0xcDA72070E455bb31C7690a170224Ce43623d0B6f"
+      abi: NFTMarketAuction
+      startBlock: 12043349
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - NFTMarketAuction
+      abis:
+        - name: NFTMarketAuction
+          file: NFTMarketAuction/abis/NFTMarketAuction.json
+      eventHandlers:
+        - event: ReserveAuctionCreated(indexed address,indexed address,indexed
+            uint256,uint256,uint256,uint256,uint256)
+          handler: handleReserveAuctionCreated
+      file: Token/Token.wasm
