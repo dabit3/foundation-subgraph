@@ -25,10 +25,11 @@ import {
 			token.contentURI = tokenContract.tokenURI(event.params.tokenId);
 			token.tokenIPFSPath = tokenContract.getTokenIPFSPath(event.params.tokenId);
 			token.name = tokenContract.name();
+			token.createdAtTimestamp = event.block.timestamp;
 		}
 		token.owner = event.params.to.toHexString();
 		token.save();
-		
+		 
 		let user = User.load(event.params.to.toHexString());
 		if (!user) {
 			user = new User(event.params.to.toHexString());
@@ -39,12 +40,14 @@ import {
 	export function handleReserveAuctionCreated(event: ReserveAuctionCreatedEvent): void  {
 		let auction = new NFTMarketAuction(event.params.auctionId.toString());
 		let token = Token.load(event.params.tokenId.toString());
+		if (!token) return;
 		auction.token = token.id;
 		auction.auctionId = event.params.auctionId;
 		auction.seller = event.params.seller.toHexString();
 		auction.duration = event.params.duration;
 		auction.reservePrice = event.params.reservePrice;
 		auction.extensionDuration = event.params.extensionDuration;
+		auction.createdAtTimestamp = event.block.timestamp;
 		auction.save();
 	}
   

@@ -85,21 +85,22 @@ export class Token extends Entity {
     }
   }
 
-  get name(): string | null {
+  get name(): string {
     let value = this.get("name");
-    if (value === null || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toString();
-    }
+    return value.toString();
   }
 
-  set name(value: string | null) {
-    if (value === null) {
-      this.unset("name");
-    } else {
-      this.set("name", Value.fromString(value as string));
-    }
+  set name(value: string) {
+    this.set("name", Value.fromString(value));
+  }
+
+  get createdAtTimestamp(): BigInt {
+    let value = this.get("createdAtTimestamp");
+    return value.toBigInt();
+  }
+
+  set createdAtTimestamp(value: BigInt) {
+    this.set("createdAtTimestamp", Value.fromBigInt(value));
   }
 
   get creator(): string {
@@ -209,15 +210,6 @@ export class NFTMarketAuction extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get token(): string {
-    let value = this.get("token");
-    return value.toString();
-  }
-
-  set token(value: string) {
-    this.set("token", Value.fromString(value));
-  }
-
   get seller(): string {
     let value = this.get("seller");
     return value.toString();
@@ -225,6 +217,15 @@ export class NFTMarketAuction extends Entity {
 
   set seller(value: string) {
     this.set("seller", Value.fromString(value));
+  }
+
+  get token(): string {
+    let value = this.get("token");
+    return value.toString();
+  }
+
+  set token(value: string) {
+    this.set("token", Value.fromString(value));
   }
 
   get duration(): BigInt {
@@ -261,5 +262,14 @@ export class NFTMarketAuction extends Entity {
 
   set auctionId(value: BigInt) {
     this.set("auctionId", Value.fromBigInt(value));
+  }
+
+  get createdAtTimestamp(): BigInt {
+    let value = this.get("createdAtTimestamp");
+    return value.toBigInt();
+  }
+
+  set createdAtTimestamp(value: BigInt) {
+    this.set("createdAtTimestamp", Value.fromBigInt(value));
   }
 }
